@@ -1,22 +1,31 @@
 import { Template } from 'meteor/templating';
-import { ReactiveVar } from 'meteor/reactive-var';
+import { Subjects } from '../api/subjects.js';
 
 import './main.html';
 
-Template.hello.onCreated(function helloOnCreated() {
-  // counter starts at 0
-  this.counter = new ReactiveVar(0);
+Template.body.helpers({
+	subjects() {
+		return Subjects.find({})
+	}
 });
 
-Template.hello.helpers({
-  counter() {
-    return Template.instance().counter.get();
-  },
-});
+Template.body.events({
+	'submit .new-subject' (event) {
+		event.preventDefault();
+		const $target = $(event.target);
 
-Template.hello.events({
-  'click button'(event, instance) {
-    // increment the counter when button is clicked
-    instance.counter.set(instance.counter.get() + 1);
-  },
+		const fname = $target.find('#new-fname').val();
+		const lname = $target.find('#new-lname').val();
+		const contactedNow = $target.find('#contacted-now').val() == 'on';
+		const lastContacted = contactedNow ? new Date() : null;
+
+		Subjects.insert({
+			fname : fname,
+			lname : lname,
+			lastContacted : lastContacted,
+			createdAt : new Date(),
+		});
+
+		$target.val('');
+	}
 });

@@ -1,17 +1,30 @@
 <head>
-  <title>simple</title>
+  <title>Simple CRM</title>
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
-
-  {{> hello}}
-  {{> info}}
+  <h1>Subjects</h1>
+  <ul>
+  {{#each subjects}}
+    {{>subject_list}}
+  {{/each}}
+  </ul>
+  <form class="new-subject">
+    <input type="text" name="fname" id="new-fname" placeholder="First Name" />
+    <input type="text" name="lname" id="new-lname" placeholder="Last Name" />
+    <input type="checkbox" id="contacted-now" />
+    <label for="contacted-now">Just contacted</label>
+    <input type="submit" value="Add">
+  </form>
 </body>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+<template name="subject_list">
+<li>
+  {{fname}} {{lname}}
+  {{#if lastContacted}}
+  <div>last contacted: {{lastContacted }}</div>
+  {{/if}}
+</li>
 </template>
 
 <template name="info">
