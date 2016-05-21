@@ -3,6 +3,11 @@ import { Subjects } from '../api/subjects.js';
 
 import './main.html';
 
+
+Template.body.rendered = function() {
+	$('#contacted').datepicker();
+};
+
 Template.body.helpers({
 	subjects() {
 		return Subjects.find({})
@@ -10,19 +15,21 @@ Template.body.helpers({
 });
 
 Template.body.events({
+	'focus #contacted' (event) {
+
+	},
 	'submit .new-subject' (event) {
 		event.preventDefault();
 		const $target = $(event.target);
 
 		const fname = $target.find('#new-fname').val();
 		const lname = $target.find('#new-lname').val();
-		const contactedNow = $target.find('#contacted-now').val() == 'on';
-		const lastContacted = contactedNow ? new Date() : null;
+		const lastcontacted = new Date($target.find('#contacted').val());
 
 		Subjects.insert({
 			fname : fname,
 			lname : lname,
-			lastContacted : lastContacted,
+			lastContacted : lastcontacted,
 			createdAt : new Date(),
 		});
 

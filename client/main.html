@@ -12,8 +12,8 @@
   <form class="new-subject">
     <input type="text" name="fname" id="new-fname" placeholder="First Name" />
     <input type="text" name="lname" id="new-lname" placeholder="Last Name" />
-    <input type="checkbox" id="contacted-now" />
-    <label for="contacted-now">Just contacted</label>
+    <input type="text" id="contacted" />
+    <label for="contacted-now">Contacted</label>
     <input type="submit" value="Add">
   </form>
 </body>
@@ -22,7 +22,7 @@
 <li>
   {{fname}} {{lname}}
   {{#if lastContacted}}
-  <div>last contacted: {{lastContacted }}</div>
+  <div>last contacted: {{lastContacted.toLocaleString }}</div>
   {{/if}}
 </li>
 </template>
