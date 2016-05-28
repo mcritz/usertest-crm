@@ -1,0 +1,21 @@
+<template name="subject">
+<tr>
+  <td>{{fname}}</td>
+  <td>{{lname}}</td>
+  <td>
+  {{#if email}}
+    {{email}}
+  {{/if}}
+  </td>
+  <td>
+  {{#if lastContacted}}
+    {{lastContacted.toLocaleString }}
+  {{else}}
+    —
+  {{/if}}
+  </td>
+  <td>
+    <button class="remove btn btn-default" type="submit">&times;</button>
+  </td>
+</tr>
+</template>
