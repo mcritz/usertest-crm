@@ -19,8 +19,6 @@ var validateEmail = function(someText) {
 	if (!someText.length) { return false; }
 	var emailRegEx = new RegExp(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi);
 
-	console.log(someText.match(emailRegEx));
-
 	if (!someText.match(emailRegEx)) { return false; }
 	return true;
 }
@@ -39,7 +37,6 @@ Template.body.events({
 		const $target = $(event.target);
 
 		$target.find('.form-group').removeClass('has-success has-warning');
-		console.log($target.find('.form-group'));
 
 		const fname = $target.find('#new-fname').val().trim();
 		const lname = $target.find('#new-lname').val().trim();
